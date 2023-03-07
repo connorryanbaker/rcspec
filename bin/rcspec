@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "rcspec"
+
+path = ARGV.first || "spec"
+results = RCSpec::Execution::Runner.from_path(path)
+RCSpec::Execution::Output.from_results(results.flatten)
