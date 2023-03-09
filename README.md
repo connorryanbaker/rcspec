@@ -1,15 +1,15 @@
-# Rcspec
+# RCSpec
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rcspec`. To experiment with that code, run `bin/console` for an interactive prompt.
+![Royal Crown Cola](https://upload.wikimedia.org/wikipedia/commons/e/ed/RC_Cola_logo.svg)
 
-TODO: Delete this and the text above, and describe your gem
+The RC Cola of testing libraries.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rcspec'
+gem 'rcspec', git: 'https://github.com/connorryanbaker/rcspec'
 ```
 
 And then execute:
@@ -22,17 +22,57 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+RCSpec implements an RSpec inspired DSL with our old friends `describe`, `it` and `expect`.
 
-## Development
+```ruby
+describe "basic matching" do
+  it "detects equality" do
+    expect(1 + 1).to.eq(2)
+  end
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+  it "detects inclusion" do
+    expect(%i[wow hey there]).to.include(:wow)
+  end
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+  it "detects errors raised" do
+    expect { 7 / 0 }.to.raise_error(ZeroDivisionError)
+  end
+
+  it "will tell you when an example fails" do
+    expect(:foo).to.eq(:bar)
+  end
+end
+```
+
+Run your specs with `bundle exec rcspec` - if a path is provided, RCSpec will run specs in provided file / directory, otherwise it is assumed that the default directory is `spec` in RSpec tradition.
+
+```bash
+$ bundle exec rcspec spec/example_spec.rb 
+
+...F
+
+basic matching
+        it will tell you when an example fails
+        Expectation failed. Expected: bar | Received foo
+
+4 examples, 1 failures
+```
+
+## Notably Absent Features
+
+As this is very much a toy project, many of RSpec's most well loved features have yet to be implemented including:
+- mocks
+- `let` / `let!` / `subject`
+- hooks
+- nested `describe` / `context` blocks
+- configurable output formatting
+- much more
+
+Perhaps these will be revisited in the future? Only time will tell :D
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rcspec.
+Bug reports and pull requests are welcome on GitHub at https://github.com/connorryanbaker/rcspec.
 
 ## License
 
