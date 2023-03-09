@@ -9,7 +9,7 @@ The RC Cola of testing libraries.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rcspec', git: 'https://github.com/connorryanbaker/rcspec'
+gem 'rcspec', git: 'https://github.com/connorryanbaker/rcspec', branch: 'main'
 ```
 
 And then execute:
